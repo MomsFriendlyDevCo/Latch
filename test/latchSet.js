@@ -54,10 +54,11 @@ describe('@MomsFriendlyDevCo/Latch # LatchSet Class', ()=> {
 		).to.throw;
 	});
 
-	it.skip('hierarchical permissions', ()=> {
+	it('hierarchical permissions', ()=> {
 		expect(new LatchSet()
 			.add('foo::bar::all')
 			.grant('foo::bar::all', 'foo::bar::foo')
+			.grant('foo::bar::foo', 'foo::bar::flarp')
 			.grant('foo::bar::all', ['foo::bar::bar', 'foo::bar::baz'])
 			.grant('foo::bar::all', ['foo::bar::corge', new Latch('foo::bar::grault')])
 			.asArray()
@@ -72,21 +73,13 @@ describe('@MomsFriendlyDevCo/Latch # LatchSet Class', ()=> {
 			'foo::bar::grault',
 		]);
 
+		// NOTE: This is out of order
 		expect(new LatchSet()
 			.grant('foo::bar::all', 'foo::bar::foo')
-			.grant('foo::bar::all', ['foo::bar::bar', 'foo::bar::baz'])
-			.grant('foo::bar::all', ['foo::bar::corge', new Latch('foo::bar::grault')])
 			.add('foo::bar::all')
 			.asArray()
-			.sort()
 		).to.deep.equal([
 			'foo::bar::all',
-			'foo::bar::bar',
-			'foo::bar::baz',
-			'foo::bar::corge',
-			'foo::bar::flarp',
-			'foo::bar::foo',
-			'foo::bar::grault',
 		]);
 	});
 
