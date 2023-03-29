@@ -1,0 +1,55 @@
+{
+  "name": "@momsfriendlydevco/latch",
+  "version": "1.0.0",
+  "description": "Permission parsing, masking, verification",
+  "scripts": {
+    "lint": "eslint lib test",
+    "test": "mocha"
+  },
+  "keywords": [
+    "latch",
+    "env"
+  ],
+  "type": "module",
+  "imports": {
+    "#lib/*": "./lib/*.js"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./*": "./lib/*.js"
+  },
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MomsFriendlyDevCo/latch.git"
+  },
+  "author": "Matt Carter <matt@mfdc.biz>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MomsFriendlyDevCo/latch/issues"
+  },
+  "homepage": "https://github.com/MomsFriendlyDevCo/latch#readme",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "eslint": "^8.28.0",
+    "mocha": "^10.1.0"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 13,
+      "sourceType": "module"
+    }
+  }
+}
