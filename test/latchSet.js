@@ -33,25 +33,21 @@ describe('@MomsFriendlyDevCo/Latch # LatchSet Class', ()=> {
 		]);
 	});
 
-	it.skip('permission masking', ()=> {
+	it('permission masking', ()=> {
 		let latchSet = new LatchSet()
 			.add('foo::bar::@')
 
 		expect(latchSet
 			.mask('...::...::baz')
-			.matches('foo::bar::baz')
-		).to.be.true;
+			.toArray()
+		).to.deep.equal([
+			'foo::bar::baz',
+		]);
 
 		expect(latchSet
-			.mask('...::...::@')
-			.matches('foo::bar::@')
+			.mask('...::...::baz')
+			.has('foo::bar::baz')
 		).to.be.true;
-
-		expect(()=> latchSet
-			.mask('...::...::@')
-			.matches('foo::bar::@')
-			.final()
-		).to.throw;
 	});
 
 	it('hierarchical permissions', ()=> {
