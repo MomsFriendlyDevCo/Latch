@@ -26,7 +26,7 @@ describe('@MomsFriendlyDevCo/Latch # LatchSet Class', ()=> {
 		expect(latchSet.hasAny(new Latch('foo::bar::one'), 'foo::bar::three')).to.be.true;
 		expect(latchSet.hasAny(new Latch('foo::bar::one'), 'foo::bar::four')).to.be.true;
 
-		expect(latchSet.asArray()).to.deep.equal([
+		expect(latchSet.toArray()).to.deep.equal([
 			'foo::bar::one',
 			'foo::bar::two',
 			'foo::bar::three',
@@ -61,7 +61,7 @@ describe('@MomsFriendlyDevCo/Latch # LatchSet Class', ()=> {
 			.grant('foo::bar::foo', 'foo::bar::flarp')
 			.grant('foo::bar::all', ['foo::bar::bar', 'foo::bar::baz'])
 			.grant('foo::bar::all', ['foo::bar::corge', new Latch('foo::bar::grault')])
-			.asArray()
+			.toArray()
 			.sort()
 		).to.deep.equal([
 			'foo::bar::all',
@@ -77,7 +77,7 @@ describe('@MomsFriendlyDevCo/Latch # LatchSet Class', ()=> {
 		expect(new LatchSet()
 			.grant('foo::bar::all', 'foo::bar::foo')
 			.add('foo::bar::all')
-			.asArray()
+			.toArray()
 		).to.deep.equal([
 			'foo::bar::all',
 		]);

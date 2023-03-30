@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import Latch from '#lib/latch';
 import LatchSet from '#lib/latchSet';
 
-describe.only('@MomsFriendlyDevCo/Latch # custom sets', ()=> {
+describe('@MomsFriendlyDevCo/Latch # custom sets', ()=> {
 
 	let latchSet;
 	it('setup LatchSet instance', ()=> {
