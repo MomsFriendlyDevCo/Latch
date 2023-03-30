@@ -48,6 +48,65 @@ describe('@MomsFriendlyDevCo/Latch # LatchSet Class', ()=> {
 			.mask('...::...::baz')
 			.has('foo::bar::baz')
 		).to.be.true;
+
+		expect(latchSet
+			.mask({verb: 'baz'})
+			.toArray()
+		).to.deep.equal(['foo::bar::baz'])
+	});
+
+	it('permission masking + guessing verbs from requests', ()=> {
+		let latchSet = new LatchSet().add('foo::bar::@');
+
+		expect(latchSet.maskFromRequest({
+			method: 'GET',
+		})
+		.toArray()).to.deep.equal(['foo::bar::query'])
+
+		expect(latchSet.maskFromRequest({
+			method: 'GET',
+			params: {
+				id: '123',
+			},
+		})
+		.toArray()).to.deep.equal(['foo::bar::get'])
+
+		expect(latchSet.maskFromRequest({
+			method: 'GET',
+			params: {
+				id: 'count',
+			},
+		})
+		.toArray()).to.deep.equal(['foo::bar::count'])
+
+		expect(latchSet.maskFromRequest({
+			method: 'GET',
+			params: {
+				id: 'meta',
+			},
+		})
+		.toArray()).to.deep.equal(['foo::bar::meta'])
+
+		expect(latchSet.maskFromRequest({
+			method: 'DELETE',
+			params: {
+				id: '123',
+			},
+		})
+		.toArray()).to.deep.equal(['foo::bar::delete'])
+
+		expect(latchSet.maskFromRequest({
+			method: 'POST',
+		})
+		.toArray()).to.deep.equal(['foo::bar::create'])
+
+		expect(latchSet.maskFromRequest({
+			method: 'POST',
+			params: {
+				id: '123',
+			},
+		})
+		.toArray()).to.deep.equal(['foo::bar::save'])
 	});
 
 	it('hierarchical permissions', ()=> {

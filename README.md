@@ -105,6 +105,20 @@ LatchSet.mask(mask)
 Apply a permission mask, returning a new clone of the LatchSet and all member Latch instances.
 
 
+LatchSet.maskFromRequest(mask)
+------------------------------
+Compute + apply a mask based on an incoming ExpressRequest(-like) object.
+
+Options are:
+
+| Option    | Type       | Default                 | Description                                                                                               |
+|-----------|------------|-------------------------|-----------------------------------------------------------------------------------------------------------|
+| `context` | `Function` | `req => req.params?.id` | Function to extract the document being referred to, if any. Usually `req.params.id` but can be repurposed |
+| `maskKey` | `String`   | `'verb'`                | Key to set to the eventual extracted verb, prior to masking                                               |
+
+Returns a LatchSet clone with all members masked.
+
+
 LatchSet.setHandler / setParser / setStringify
 ----------------------------------------------
 Set entire set handler functions. See Latch for documentation on these.
