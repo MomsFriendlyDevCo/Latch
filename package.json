@@ -21,14 +21,14 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MomsFriendlyDevCo/latch.git"
+    "url": "git+https://github.com/MomsFriendlyDevCo/Latch.git"
   },
   "author": "Matt Carter <matt@mfdc.biz>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MomsFriendlyDevCo/latch/issues"
+    "url": "https://github.com/MomsFriendlyDevCo/Latch/issues"
   },
-  "homepage": "https://github.com/MomsFriendlyDevCo/latch#readme",
+  "homepage": "https://github.com/MomsFriendlyDevCo/Latch#readme",
   "engineStrict": true,
   "engines": {
     "node": ">=16.14.0"
