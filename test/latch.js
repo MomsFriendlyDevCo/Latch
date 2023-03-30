@@ -13,6 +13,24 @@ describe('@MomsFriendlyDevCo/Latch # Latch Class', ()=> {
 		).to.throw;
 
 		expect(
+			new Latch({
+				source: 'foo',
+				noun: 'bar',
+				verb: 'baz',
+			})
+				.toString()
+		).to.equal('foo::bar::baz');
+
+		expect(
+			new Latch('foo::bar::baz')
+				.toObject()
+		).to.deep.equal({
+			source: 'foo',
+			noun: 'bar',
+			verb: 'baz',
+		});
+
+		expect(
 			new Latch('foo::bar::baz')
 				.setParser(v => /^(?<one>.+?)::(?<two>.+?)::(?<three>.+)$/.exec(v)?.groups)
 				.matches(
@@ -40,32 +58,21 @@ describe('@MomsFriendlyDevCo/Latch # Latch Class', ()=> {
 		).to.be.false;
 	});
 
-	it.skip('permission masking', ()=> {
+	it('permission masking', ()=> {
 		expect(
 			new Latch('foo::@::@')
 				.mask('...::bar::baz')
-				.format()
+				.toString()
 		).to.equal('foo::bar::baz')
 
 		expect(
 			new Latch('foo::@::@')
 				.mask({
-					entity: 'BAR',
-				})
-				.format()
-		).to.equal('foo::bar::@')
-
-		expect(
-			new Latch('foo::@::@')
-				.mask({
-					entity: 'BAR',
+					noun: 'BAR',
+					verb: 'BAZ',
 				})
 				.toString()
-		).to.equal({
-			source: 'foo',
-			entity: 'BAR',
-			verb: '@',
-		});
+		).to.equal('foo::BAR::BAZ')
 	});
 
 });
